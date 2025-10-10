@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 10
+  health: 20
   score: 100
 --- !u!114 &1804340384768779743
 MonoBehaviour:
