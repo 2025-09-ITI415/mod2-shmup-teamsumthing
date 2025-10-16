@@ -115,10 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14c788f5e2d34bec99acba4add21271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 12
   fireRate: 0.3
   health: 10
   score: 100
+  powerUpDropChance: 1
   lifeTime: 5
   midpointYRange: {x: 1.5, y: 3}
   drawDebugInfo: 1
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showingColor: 0
   blinkCompleteTime: 0
+  ignoreOnCollisionEnter: 0
 --- !u!1001 &6217192625199160741
 PrefabInstance:
   m_ObjectHideFlags: 0
