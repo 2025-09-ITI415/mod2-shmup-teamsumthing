@@ -118,7 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.3
-  health: 20
+  health: 200
   score: 300
   powerUpDropChance: 1
   duration: 4
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6aa2e3d3e348345a6165a67b7cc422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 12
+  health: 50
 --- !u!1001 &9185519999970266962
 PrefabInstance:
   m_ObjectHideFlags: 0

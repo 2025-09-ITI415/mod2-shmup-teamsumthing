@@ -105,6 +105,7 @@ public class PowerUp : MonoBehaviour
         letter.text = def.letter;          // Set the letter that is shown
         _type = wt;                         // Finally actually set the type
     }
+    
 
     /// <summary>
     /// This function is called by the Hero class when a PowerUp is collected.

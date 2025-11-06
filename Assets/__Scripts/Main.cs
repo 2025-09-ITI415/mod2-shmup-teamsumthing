@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;   // Enables the loading & reloading of scenes
+using TMPro;
 
 [RequireComponent(typeof(BoundsCheck))]
 public class Main : MonoBehaviour
@@ -22,6 +23,8 @@ public class Main : MonoBehaviour
                                      eWeaponType.blaster, eWeaponType.blaster,
                                      eWeaponType.spread,  eWeaponType.shield };
     private BoundsCheck bndCheck;
+    private float elapsedTime = 0f;
+    public TextMeshProUGUI timerText;
 
     void Awake()
     {
@@ -41,7 +44,13 @@ public class Main : MonoBehaviour
         }
 
     }
-
+    void Update(){
+        elapsedTime += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+        timerText.text = elapsedTime.ToString("F2");
+    }
     public void SpawnEnemy()
     {
         // If spawnEnemies is false, skip to the next invoke of SpawnEnemy()
@@ -84,6 +93,7 @@ public class Main : MonoBehaviour
         // Reload __Scene_0 to restart the game
         // "__Scene_0" below starts with 2 underscores and ends with a zero.
         SceneManager.LoadScene("__Scene_0");                               // d
+        elapsedTime = 0f;
     }
 
     static public void HERO_DIED()

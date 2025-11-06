@@ -15,11 +15,19 @@ public class Hero : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
+    public AudioSource blasterSound;
+    private int pitchDeterminer = 0;
+    private int levelMeter = 1;
+    public AudioSource shieldSound;
+    public GameObject shield1;
+    public GameObject shield2;
+    public GameObject shield3;
+    public GameObject shield4;
 
     [Header("Dynamic")]
     [Range(0, 4)]
     [SerializeField]                                        // b
-    private float _shieldLevel = 1;
+    private float _shieldLevel = 4;
 
     [Tooltip("This field holds a reference to the last triggering GameObject")]
     private GameObject lastTriggerGo = null;
@@ -72,8 +80,13 @@ public class Hero : MonoBehaviour
         if (Input.GetAxis("Jump") == 1 && fireEvent != null)
         {
             fireEvent();
+            if (!blasterSound.isPlaying){
+                blasterSound.Play();
+            }
         }
-
+        if (Input.GetAxis("Jump") == 0){
+            blasterSound.Stop();
+        }
     }
 
 
@@ -108,6 +121,18 @@ public class Hero : MonoBehaviour
         {  // If the shield was triggered by an enemy
             shieldLevel--;        // Decrease the level of the shield by 1
             Destroy(go);          // … and Destroy the enemy                  // f
+            if (shieldLevel == 3){
+                shield4.SetActive(false);
+            }
+            else if(shieldLevel == 2){
+                shield3.SetActive(false);
+            }
+            else if(shieldLevel == 1){
+                shield2.SetActive(false);
+            }
+            else if(shieldLevel == 0){
+                shield2.SetActive(false);
+            }
         }
         else if (pUp != null)
         {
@@ -163,11 +188,14 @@ public class Hero : MonoBehaviour
 
     public void AbsorbPowerUp(PowerUp pUp)
     {
-        Debug.Log("Absorbed PowerUp: " + pUp.type);                         // b
+        Debug.Log("Absorbed PowerUp: " + pUp.type);   
+                              // b
+        shieldSound.Play();
         switch (pUp.type)
         {
             case eWeaponType.shield:                                              // a 
                 shieldLevel++;
+                shieldSound.Play();
                 break;
 
             default:                                                             // b
@@ -184,6 +212,14 @@ public class Hero : MonoBehaviour
                 { // If this is a different weapon type                   // d
                     ClearWeapons();
                     weapons[0].SetType(pUp.type);
+                    if (pitchDeterminer == 0){
+                        blasterSound.pitch = -0.72f;
+                        pitchDeterminer = 1;
+                    }
+                    else{
+                        blasterSound.pitch = 0.72f;
+                        pitchDeterminer = 0;
+                    }
                 }
                 break;
 
