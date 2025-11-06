@@ -29,6 +29,9 @@ public class Hero : MonoBehaviour
     public GameObject wLevel3;
     public GameObject wLevel4;
     public GameObject wLevel5;
+    public Material whiteMat;
+    public Material cyanMat;
+
 
 
     [Header("Dynamic")]
@@ -68,6 +71,16 @@ public class Hero : MonoBehaviour
         wLevel4.SetActive(false);
         wLevel3.SetActive(false);
         wLevel2.SetActive(false);
+    }
+    void UpdateColor(bool isCyan)
+    {
+    Material matToUse = isCyan ? cyanMat : whiteMat;
+
+    wLevel1.GetComponent<Renderer>().material = matToUse;
+    wLevel2.GetComponent<Renderer>().material = matToUse;
+    wLevel3.GetComponent<Renderer>().material = matToUse;
+    wLevel4.GetComponent<Renderer>().material = matToUse;
+    wLevel5.GetComponent<Renderer>().material = matToUse;
     }
 
     void Update()
@@ -260,21 +273,13 @@ public class Hero : MonoBehaviour
                     if (pitchDeterminer == 0){
                         blasterSound.pitch = -0.72f;
                         pitchDeterminer = 1;
-                        wLevel1.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
-                        wLevel2.GetComponent<Renderer>().material.color = HexToColor("00FFFF");                    
-                        wLevel3.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
-                        wLevel4.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
-                        wLevel5.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
+                        UpdateColor(true);
                     
                     }
                     else{
                         blasterSound.pitch = 0.72f;
                         pitchDeterminer = 0;
-                        wLevel1.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
-                        wLevel2.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");                    
-                        wLevel3.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
-                        wLevel4.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
-                        wLevel5.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
+                        UpdateColor(false);
                     }
                 }
                 break;

@@ -16,6 +16,7 @@ public class BlinkColorOnHit : MonoBehaviour
     private Material[] materials;   // All the Materials of this & its children
     private Color[] originalColors;
     private BoundsCheck bndCheck;
+    
 
     void Awake()
     {
@@ -39,6 +40,7 @@ public class BlinkColorOnHit : MonoBehaviour
     void OnCollisionEnter(Collision coll)
     {
         if ( ignoreOnCollisionEnter ) return; 
+        hitSound.Play();
         // Check for collisions with ProjectileHero
         ProjectileHero p = coll.gameObject.GetComponent<ProjectileHero>();
         if (p != null)
@@ -49,6 +51,7 @@ public class BlinkColorOnHit : MonoBehaviour
             }
             SetColors();
         }
+        
     }
 
     /// <summary

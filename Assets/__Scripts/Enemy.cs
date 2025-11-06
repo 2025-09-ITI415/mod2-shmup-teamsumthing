@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoundsCheck))]
 public class Enemy : MonoBehaviour
 {
-
+    public AudioSource hitSound;
 
     [Header("Inscribed")]
     public float speed = 10f;   // The movement speed is 10m/s
@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
+        hitSound.Play();
         GameObject otherGO = coll.gameObject;
 
         // Check for collisions with ProjectileHero
