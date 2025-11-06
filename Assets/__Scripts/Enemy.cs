@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoundsCheck))]
 public class Enemy : MonoBehaviour
 {
-    public AudioSource hitSound;
+
 
     [Header("Inscribed")]
     public float speed = 10f;   // The movement speed is 10m/s
@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     public float health = 10;    // Damage needed to destroy this enemy
     public int score = 100;   // Points earned for destroying this
     public float powerUpDropChance = 1f;
-
 
     // private BoundsCheck bndCheck;                                             // b
     protected BoundsCheck bndCheck;
@@ -59,7 +58,6 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        hitSound.Play();
         GameObject otherGO = coll.gameObject;
 
         // Check for collisions with ProjectileHero

@@ -40,7 +40,7 @@ public class BlinkColorOnHit : MonoBehaviour
     void OnCollisionEnter(Collision coll)
     {
         if ( ignoreOnCollisionEnter ) return; 
-        hitSound.Play();
+
         // Check for collisions with ProjectileHero
         ProjectileHero p = coll.gameObject.GetComponent<ProjectileHero>();
         if (p != null)
