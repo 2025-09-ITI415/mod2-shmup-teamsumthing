@@ -18,11 +18,18 @@ public class Hero : MonoBehaviour
     public AudioSource blasterSound;
     private int pitchDeterminer = 0;
     private int levelMeter = 1;
+    private int wLevel = 1;
     public AudioSource shieldSound;
     public GameObject shield1;
     public GameObject shield2;
     public GameObject shield3;
     public GameObject shield4;
+    public GameObject wLevel1;
+    public GameObject wLevel2;
+    public GameObject wLevel3;
+    public GameObject wLevel4;
+    public GameObject wLevel5;
+
 
     [Header("Dynamic")]
     [Range(0, 4)]
@@ -36,7 +43,11 @@ public class Hero : MonoBehaviour
     public delegate void WeaponFireDelegate();                                // a     // Create a WeaponFireDelegate event named fireEvent.
     public event WeaponFireDelegate fireEvent;
 
-
+    Color HexToColor(string hex){
+        Color color;
+        ColorUtility.TryParseHtmlString(hex, out color);
+        return color;
+    }
 
     void Awake()
     {
@@ -53,6 +64,10 @@ public class Hero : MonoBehaviour
         // Reset the weapons to start _Hero with 1 blaster
         ClearWeapons();
         weapons[0].SetType(eWeaponType.blaster);
+        wLevel5.SetActive(false);
+        wLevel4.SetActive(false);
+        wLevel3.SetActive(false);
+        wLevel2.SetActive(false);
     }
 
     void Update()
@@ -131,7 +146,7 @@ public class Hero : MonoBehaviour
                 shield2.SetActive(false);
             }
             else if(shieldLevel == 0){
-                shield2.SetActive(false);
+                shield1.SetActive(false);
             }
         }
         else if (pUp != null)
@@ -195,7 +210,18 @@ public class Hero : MonoBehaviour
         {
             case eWeaponType.shield:                                              // a 
                 shieldLevel++;
-                shieldSound.Play();
+                if (shieldLevel == 1){
+                    shield1.SetActive(true);
+                }
+                else if(shieldLevel == 2){
+                    shield2.SetActive(true);
+                }
+                else if(shieldLevel == 3){
+                    shield3.SetActive(true);
+                }
+                else if(shieldLevel == 4){
+                    shield4.SetActive(true);
+                }
                 break;
 
             default:                                                             // b
@@ -207,18 +233,48 @@ public class Hero : MonoBehaviour
                         // Set it to pUp.type
                         weap.SetType(pUp.type);
                     }
+                    wLevel++;
+                    if (wLevel == 2){
+                        wLevel2.SetActive(true);
+                    }
+                    else if(wLevel == 3){
+                        wLevel3.SetActive(true);
+                    }
+                    else if(wLevel == 4){
+                        wLevel4.SetActive(true);
+                    }
+                    else if(wLevel == 5){
+                        wLevel5.SetActive(true);
+                    }
+
                 }
                 else
                 { // If this is a different weapon type                   // d
                     ClearWeapons();
+                    wLevel = 1;
+                    wLevel5.SetActive(false);
+                    wLevel4.SetActive(false);
+                    wLevel3.SetActive(false);
+                    wLevel2.SetActive(false);
                     weapons[0].SetType(pUp.type);
                     if (pitchDeterminer == 0){
                         blasterSound.pitch = -0.72f;
                         pitchDeterminer = 1;
+                        wLevel1.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
+                        wLevel2.GetComponent<Renderer>().material.color = HexToColor("00FFFF");                    
+                        wLevel3.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
+                        wLevel4.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
+                        wLevel5.GetComponent<Renderer>().material.color = HexToColor("00FFFF");
+                    
                     }
                     else{
                         blasterSound.pitch = 0.72f;
                         pitchDeterminer = 0;
+                        wLevel1.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
+                        wLevel2.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");                    
+                        wLevel3.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
+                        wLevel4.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
+                        wLevel5.GetComponent<Renderer>().material.color = HexToColor("FFFFFF");
                     }
                 }
                 break;
