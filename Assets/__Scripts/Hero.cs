@@ -15,6 +15,10 @@ public class Hero : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
+    private int lifeNum = 3;
+    public GameObject life1;
+    public GameObject life2;
+    public GameObject life3;
 
     [Header("Dynamic")]
     [Range(0, 4)]
@@ -130,9 +134,31 @@ public class Hero : MonoBehaviour
             {                                                  // e
                 Destroy(this.gameObject);  // Destroy the Hero
                 Main.HERO_DIED();
+                if (lifeNum == 3)
+                {
+                    if (life3 != null) life3.SetActive(false);
+        lifeNum--;
+                }
+                else if (lifeNum == 2)
+                {
+                    if (life2 != null) life2.SetActive(false);
+        lifeNum--;
+                }
+                else if (lifeNum == 1)
+                {
+                   if (life1 != null) life1.SetActive(false);
+        lifeNum--;
+    {
+        Main.HERO_DIED();
+        Destroy(gameObject);
+        return;
+    }
+                }
             }
+
         }
     }
+    
 
     /// <summary>
     /// Finds the first empty Weapon slot (i.e., type=none) and returns it.
