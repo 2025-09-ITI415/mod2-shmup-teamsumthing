@@ -40,8 +40,8 @@ public class PowerUp : MonoBehaviour
         vel.z = 0;         // Flatten the vel to the XY plane
         vel.Normalize();   // Normalizing a Vector3 sets its length to 1m
 
-        vel *= Random.Range(driftMinMax.x, driftMinMax.y);                    // d
-        rigid.linearVelocity = vel;
+       vel *= Random.Range(driftMinMax.x, driftMinMax.y);
+    rigid.velocity = vel;
 
         // Set the rotation of this PowerUp GameObject to R:[ 0, 0, 0 ]
         transform.rotation = Quaternion.identity;

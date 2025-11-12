@@ -10,22 +10,20 @@ public class ProjectileHero : MonoBehaviour
 
     [Header("Dynamic")]
     public Rigidbody rigid;
-    [SerializeField]                                                         // a
+    [SerializeField]
     private eWeaponType _type;
-
 
     // This public property masks the private field _type
     public eWeaponType type
-    {                                              // c
-        get { return (_type); }
+    {
+        get { return _type; }
         set { SetType(value); }
     }
-
 
     void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
-        rend = GetComponent<Renderer>();                                     // d
+        rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
     }
 
@@ -38,8 +36,7 @@ public class ProjectileHero : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the _type private field and colors this projectile to match the 
-    ///   WeaponDefinition.
+    /// Sets the _type private field and colors this projectile to match the WeaponDefinition.
     /// </summary>
     /// <param name="eType">The eWeaponType to use.</param>
     public void SetType(eWeaponType eType)
@@ -54,8 +51,7 @@ public class ProjectileHero : MonoBehaviour
     /// </summary>
     public Vector3 vel
     {
-        get { return rigid.linearVelocity; }
-        set { rigid.linearVelocity = value; }
+        get { return rigid.velocity; }     
+        set { rigid.velocity = value; }     
     }
-
 }
